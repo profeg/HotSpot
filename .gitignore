@@ -1,0 +1,4 @@
+.env
+*.sqlite3
+.byebug_history
+config/database.yml

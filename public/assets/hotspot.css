@@ -1,0 +1,36 @@
+#tabs > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#tabs > ul > li {
+    float: left;
+    margin: 3px 3px 0px 3px;
+    padding: 5px 5px 0px 5px;
+    background-color: #CCC;
+    color: #696969;
+}
+#mainView {
+	clear: both;
+	padding: 0 1em;
+}
+.active {
+    background-color: #FFF !important;
+    color: #000 !important;
+}
+.container {
+    margin: 0px 0px 0px 0px;
+}
+ .dz-image img {
+    width: 135px !important;
+}
+.products_list a {
+    padding-left: 15px;
+}
+.row {
+    padding-top: 15px;
+}
+.interface {
+    display: flex;
+    padding-bottom: 5px;
+}

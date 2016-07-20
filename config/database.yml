@@ -1,0 +1,18 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: hotspot_dev
+  username: debian-sys-maint
+  password: HKXxztpJSQvQtqrD
+  host: 127.0.0.1
+  port: 3306
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: hotspot_test
+  username: debian-sys-maint
+  password: HKXxztpJSQvQtqrD
+  host: 127.0.0.1
+  port: 3306
+

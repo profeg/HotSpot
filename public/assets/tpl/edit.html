@@ -1,0 +1,120 @@
+<div id="viewEdit" class="container">
+<div class="row">
+	<h1>Collections</h1>
+</div>
+<div class="row">
+	<div class="col-md-6">
+			<div class="form-group">
+				<label for="title">Title:</label>
+				<input class="form-control" id="title" value="{{ collection.title }}">
+			</div>
+			<div class="form-group">
+				<label for="descr">Description:</label>
+				<textarea class="form-control" id="descr">{{ collection.description }}</textarea>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+	</div>
+	<div class="col-md-6">
+		<label>Featured Image:</label><br>
+		<img ng-src="img/{{ collection.featuredimage }}" style="width: 350px; heigth: 350px;">
+	</div>	
+</div>
+<div class="row">
+  <div class="col-md-3 products">
+		<label for="title">Products:</label>
+		<input class="form-control" id="title">
+		<ul>
+			<li>
+				<div class="products_list">
+					<img src="img/sofa.jpg"/>
+					<a href="/">
+						<span>Hudson Sofa</span>
+					</a>	
+					<a href="/">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="products_list">
+					<img src="img/sofa.jpg"/>
+					<a href="/">
+						<span>Hudson Sofa</span>
+					</a>	
+					<a href="/">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</div>
+			</li>
+		</ul>
+  </div>
+  <div class="col-md-3 similar_products">
+		<label for="title">Similar products:</label>
+		<input class="form-control" id="title">
+		<ul>
+			<li>
+				<div class="products_list">
+					<img src="img/sofa.jpg"/>
+					<a href="/">
+						<span>Hudson Sofa</span>
+					</a>	
+					<a href="/">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="products_list">
+					<img src="img/sofa.jpg"/>
+					<a href="/">
+						<span>Hudson Sofa</span>
+					</a>	
+					<a href="/">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+  <div class="col-md-6 interfaces">
+	  <label>Interfaces:</label>
+	  <div class="interfaces_list">
+	  	<div class="interface row">
+	  		<div class="col-md-4">
+		  		<p>Slider:</p>
+		  	</div>
+		  	<div class="col-md-8">
+		  		<button type="submit" class="btn btn-default">Build HotSpot</button>
+		  	</div>
+		  </div>
+		  <div class="interface row">
+		  	<div class="col-md-4">
+		  		<p>Trend:</p>
+		  	</div>
+		  	<div class="col-md-8">	
+		  		<select>
+		  			<option>
+		  				Sample Hotspot Trend
+		  			</option>
+		  		</select>
+		  		<button type="submit" class="btn btn-default">Build HotSpot</button>
+		  		<button type="submit" class="btn btn-default">Delete Hotspot</button>
+		  	</div>	
+		  </div>
+		  <div class="interface row">
+		  	<div class="col-md-4">	
+		  		<p>Gallery:</p>
+		  	</div>
+		  	<div class="col-md-8" style="float: left;">	
+			  	<select>
+			  		<option>
+			  			Existing Hotspots
+			  		</option>
+			  	</select>
+			  	<button type="submit" class="btn btn-default">Build HotSpot</button>
+			  	<button type="submit" class="btn btn-default">Save Hotspot</button>
+			  </div>	
+		  </div>	
+	  </div>
+  </div>
+</div>
