@@ -1,5 +1,47 @@
 var HotSpotApp = angular.module('hotSpot', ['ngRoute']);
-HotSpotApp.value('Collections', [
+ 
+HotSpotApp.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.
+      when('/addCollection', {
+        templateUrl: 'assets/tpl/edit.html',
+        controller: 'CollectionController'
+      }).
+      when('/editCollection/:collectionId', {
+        templateUrl: 'assets/tpl/edit.html',
+        controller: 'CollectionController'
+      }).
+      when('/showCollections', {
+        templateUrl: 'assets/tpl/all.html',
+        controller: 'MainController'
+      }).
+      otherwise({
+        redirectTo: '/showCollections'
+      });
+}]);
+
+HotSpotApp.directive('clickLink', ['$location', function($location) {
+  return {
+    link: function(scope, element, attrs) {
+    element.on('click', function() {
+      scope.$apply(function() {
+       $location.path(attrs.clickLink);
+      });
+    });
+    }
+  }
+}]);
+
+
+HotSpotApp.controller('MainController', ['$scope', '$rootScope', '$http', function ( $scope, $rootScope, $http ) {
+  if ( $rootScope.Collections == undefined ) {
+  $http.get('/collections.json')
+   .success(function(data) {
+      $rootScope.Collections = data;
+    })
+   .error(function() {
+      // fake data when error is occurred
+      $scope.Collections = [
       {
         "id": 00001,                                                                    // ID of this Collection
         "title": "First Sample Collection",                                             // Name of the Collection
@@ -37,32 +79,27 @@ HotSpotApp.value('Collections', [
           "gallery": 70002
         }
       }
-    ]);
- 
-HotSpotApp.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-      when('/editCollection/:collectionId', {
-        templateUrl: 'assets/tpl/edit.html',
-        controller: 'EditCollectionController'
-      }).
-      when('/showCollections', {
-        templateUrl: 'assets/tpl/all.html',
-        controller: 'ShowAllCollectionsController'
-      }).
-      otherwise({
-        redirectTo: '/showCollections'
-      });
+    ]});
+  } 
 }]);
 
-HotSpotApp.controller('ShowAllCollectionsController', ['$scope', 'Collections', function ($scope, Collections) {
-  $scope.Collections = Collections;
-}]);
-
-HotSpotApp.controller('EditCollectionController', ['$scope','$routeParams','Collections', function ($scope, $routeParams, Collections) {
- $scope.collection = Collections.find( function(el) {
-  return el.id == $routeParams.collectionId
- });
-
+HotSpotApp.controller('CollectionController', ['$scope','$routeParams','$rootScope', function ( $scope, $routeParams, $rootScope ) {
+  if ( $routeParams.collectionId ) {
+    $scope.collection = $rootScope.Collections.find( function(el) {
+      return el.id == $routeParams.collectionId
+    });
+  } else {
+    // $http.get('/collections.json')
+    // .success(function(data) {
+    //   $rootScope.Collections = data;
+    //   })
+    // .error(function() {
+    //   // to do somth wher error is occuired
+    // });
+  }
 
 }]); 
+
+HotSpotApp.controller('HotspotImageController', ['$scope','$routeParams', '$rootScope', '$http', function ( $scope, $routeParams, $rootScope, $http ) {
+
+}]);

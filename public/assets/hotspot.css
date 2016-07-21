@@ -34,3 +34,13 @@
     display: flex;
     padding-bottom: 5px;
 }
+
+.header {
+  border-bottom: 1px solid lightgrey;
+  h2 {
+    margin: 0px;
+  }
+  button {
+    float: right;
+  }
+}

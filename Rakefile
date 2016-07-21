@@ -1,6 +1,6 @@
+require './lib/app'
 require 'sinatra/activerecord/rake'
 require 'rake/testtask'
-require './lib/app'
 
 task :creds2heroku do
   Bundler.with_clean_env do

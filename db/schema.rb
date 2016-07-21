@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414042317) do
+ActiveRecord::Schema.define(version: 20160721150946) do
+
+  create_table "hotspot_images", force: true do |t|
+    t.string   "file_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hotspots", force: true do |t|
+    t.integer  "x"
+    t.integer  "y"
+    t.float    "icon_scale",       limit: 24
+    t.integer  "hotspot_image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hotspots", ["hotspot_image_id"], name: "index_hotspots_on_hotspot_image_id", using: :btree
 
   create_table "shops", force: true do |t|
     t.string "name"

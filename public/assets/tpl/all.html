@@ -1,21 +1,23 @@
 <div class="container"> 
-	<div class="row">
-		<h2>All Collections</h2>
+	<div class="row header">
+		<div class="col-md-6">
+			<h2>All Collections</h2>
+		</div>
+		<div class="col-md-6">
+		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">Title</div>
-		<div class="col-md-3">Description</div>
-		<div class="col-md-3">Featured Image</div>
-		<div class="col-md-3">Action</div>
+		<div class="col-md-4">Title</div>
+		<div class="col-md-4">Featured Image</div>
+		<div class="col-md-4">Description</div>
 	</div>
 	<div class="row" ng-repeat="collection in Collections">
-		<div class="col-md-3"> 
+		<div class="col-md-4"> 
 			<a ng-href="#editCollection/{{ collection.id }}"> {{ collection.title }} </a>
 		</div>
-		<div class="col-md-3"> {{ collection.description }} </div>
-		<div class="col-md-3"> 
-			<img ng-src= "img/{{ collection.featuredimage }}" >		 
+		<div class="col-md-4"> 
+			<img ng-src= "{{ collection.image.src }}" style="width: 100px;">		 
 		</div>
-		<div class="col-md-3">Delete</div>
+		<div class="col-md-4">{{ collection.body_html }}</div>
 	</div>	
 </div>
