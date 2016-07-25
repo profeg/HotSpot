@@ -1,7 +1,7 @@
 class CreateHotspotImages < ActiveRecord::Migration
 	def self.up
     create_table :hotspot_images do |t|
-			t.string :file_link
+    		t.belongs_to  :interface, index: true, foreign_key: 'interface_id'
 			t.timestamps
 		end
   end

@@ -4,8 +4,7 @@ class CreateInterfaces < ActiveRecord::Migration
 			t.string :title
 			t.string :template
 			t.string :icon
-			t.string :collections
-			t.string :file_link
+			t.belongs_to  :hotspot_custom_collection, index: true, foreign_key: 'collection_id'
 			t.timestamps
 		end
 	end

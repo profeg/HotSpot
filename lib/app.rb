@@ -9,6 +9,8 @@ require 'json'
 require 'active_record'
 require './lib/hotspot_image'
 require './lib/hotspot'
+require './lib/interface'
+require './lib/hotspot_custom_collection'
 
 class SinatraApp < Sinatra::Base
   use Rack::SSL

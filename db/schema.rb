@@ -11,13 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721150946) do
+ActiveRecord::Schema.define(version: 20160725100709) do
 
-  create_table "hotspot_images", force: true do |t|
-    t.string   "file_link"
+  create_table "hotspot_custom_collections", force: true do |t|
+    t.string   "title"
+    t.string   "template"
+    t.string   "icon"
+    t.integer  "custom_collection_id"
+    t.integer  "interface_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "hotspot_custom_collections", ["interface_id"], name: "index_hotspot_custom_collections_on_interface_id", using: :btree
+
+  create_table "hotspot_images", force: true do |t|
+    t.integer  "interface_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hotspot_images", ["interface_id"], name: "index_hotspot_images_on_interface_id", using: :btree
 
   create_table "hotspots", force: true do |t|
     t.integer  "x"
@@ -29,6 +43,17 @@ ActiveRecord::Schema.define(version: 20160721150946) do
   end
 
   add_index "hotspots", ["hotspot_image_id"], name: "index_hotspots_on_hotspot_image_id", using: :btree
+
+  create_table "interfaces", force: true do |t|
+    t.string   "title"
+    t.string   "template"
+    t.string   "icon"
+    t.integer  "hotspot_custom_collection_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interfaces", ["hotspot_custom_collection_id"], name: "index_interfaces_on_hotspot_custom_collection_id", using: :btree
 
   create_table "shops", force: true do |t|
     t.string "name"
