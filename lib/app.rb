@@ -17,7 +17,8 @@ class SinatraApp < Sinatra::Base
   register Sinatra::Shopify
   
   set :scope, 'read_products, read_orders'
-  set :database, 'mysql2://debian-sys-maint:HKXxztpJSQvQtqrD@localhost/hotspot_dev'
+  # Change DB in production
+  set :database, 'mysql2://'+ ENV['mysql_user'] + ':'  + ENV['mysql_pass'] + '@localhost/hotspot_dev' 
   get '/' do
     shopify_session do
       erb :home
@@ -35,15 +36,58 @@ class SinatraApp < Sinatra::Base
   get '/collections.json' do
     shopify_session do
       @collections = ShopifyAPI::CustomCollection.all
-      binding.pry
       content_type :json
         @collections.to_json
     end
   end
 
-  post '/create_hotspot_image' do
+  get '/hotspot_collection.json/:custom_collection_id' do
+    shopify_session do
+      @hotspot_collections = HotspotCustomCollection.find_by( custom_collection_id: params[:custom_collection_id] )
+      content_type :json
+        @hotspot_collections.to_json
+    end
+  end
+
+  get '/interface.json/:hotspot_collection_id' do
+    shopify_session do
+      @interface = Interface.find_by( collection_id: params[:hotspot_collection_id] )
+        @interface.to_json
+    end
+  end
+
+  post '/create_hotspot_collection' do
+    shopify_session do
+      params = JSON.parse request.body.read
+      if @hotspot_collection = HotspotCustomCollection.create( title: params['title'], custom_collection_id: params['custom_collection_id'] ) # params here
+        flash[:notice] = "Hotspot collection succesfully added!"
+      end  
+    end
+  end
+
+  put '/update_hotspot_collection' do
+    shopify_session do
+      params = JSON.parse request.body.read
+      if @hotspot_collection = HotspotCustomCollection.find( params['id'] )
+        @hotspot_collection.update_attributes params
+        flash[:notice] = "Hotspot collection succesfully added!"
+      end  
+    end
+  end
+
+  post '/create_interface' do
     webhook_session do |params|
-      if @hotspot_image = HotspotImage.create( file: "img/sofa.jpg" )
+      if @interface = Interface.create( collection_id: params[:collection_id]) # params here
+        flash[:notice] = "Interface succesfully added!"
+        content_type :json
+          @interface.to_json
+      end  
+    end
+  end
+
+  post '/create_hotspot_image' do
+    shopify_session do
+      if @hotspot_image = HotspotImage.create( interface_id: params[:interface_id] )
         flash[:notice] = "Hotspot Image succesfully added!"
         content_type :json
           @hotspot_image.to_json
@@ -52,11 +96,10 @@ class SinatraApp < Sinatra::Base
   end
 
   post '/create_hotspot' do
-    webhook_session do |params|
+    shopify_session do
       if Hotspot.create x: params[:x], y: params[:x], icon_scale: params[:x], hotspot_image_id: params[:hotspot_image_id]
         flash[:notice] = "Hotspot succesfully added!"
       end
-      
     end
   end
 
@@ -71,7 +114,7 @@ class SinatraApp < Sinatra::Base
   webrick_options = {
     :Port               => 8443,
     :Logger             => WEBrick::Log::new($stderr, WEBrick::Log::DEBUG),
-    :DocumentRoot       => "/ruby/htdocs",
+    :DocumentRoot       => "/home/prof/Documents/HotSpot",
     :SSLEnable          => true,
     :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
     :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join(CERT_PATH, "server.crt")).read),

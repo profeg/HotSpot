@@ -2,7 +2,6 @@ class CreateHotspotCustomCollections < ActiveRecord::Migration
 	def self.up
 		create_table :hotspot_custom_collections do |t|
 			t.string :title
-			t.string :template
 			t.string :icon
 			t.integer :custom_collection_id
 			t.belongs_to  :interface, index: true, foreign_key: 'interface_id'

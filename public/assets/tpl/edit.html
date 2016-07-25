@@ -1,68 +1,44 @@
 <div id="viewEdit" class="container">
-<div class="row">
-	<h1>Collections</h1>
-</div>
-<div class="row">
-	<div class="col-md-6">
-			<div class="form-group">
-				<label for="title">Title:</label>
-				<p> {{ collection.title }} </p>
-			</div>
-			<div class="form-group">
-				<label for="descr">Description:</label>
-				<p> {{ collection.body_html }} </p>
-			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+	<div class="row hotspot-collection">
+		<div class="data col-md-6">
+			<h2>Collection:</h2>
+			<fieldset class="form-group">
+    		<label for="title">Title</label>
+    		<input type="edit" class="form-control" id="title" placeholder="Title" ng-model="hotspot_collection.title">
+    		<label for="icon">Icon</label>
+    		<input type="file" class="form-control" id="icon" ng-model="hotspot_collection.icon">
+  		</fieldset>
+  		<button class="btn btn-primary save-collection" ng-click="saveHotspotCollection();">Save</button>
+  		<button class="btn btn-danger cancel" go-link="/showCollections">Cancel</button>
+		</div>
+		<div class="image col-md-6">
+			<h2>Featured image:</h2>
+			<img ng-src="{{ collection.image.src }}" style="width: 350px; heigth: 350px;" usemap="#hotspots">
+			<map name="hotspots">
+		  	<area shape="circle" coords="40,40,8" href="/hotspots/hs1.html" alt="HotSpot" target="_self"/>
+	    </map> 
+		</div>
 	</div>
-	<div class="col-md-6">
-		<label>Featured Image:</label><br>
-		<img ng-src="{{ collection.image.src }}" style="width: 350px; heigth: 350px;">
-	</div>	
-</div>
-<div class="row">
-  <div class="col-md-3 products">
-  </div>
-  <div class="col-md-3 similar_products">
+	<div class="row interfaces">
+		<div class="interface_sel col-md-6">
+			<h2>Interfaces:</h2>
+			<fieldset>
+				<div class="interface">
+    			<span>Slider:</span>
+    			<button class="btn btn-primary" ng-click="">Build</button>
+				</div>
+				<div class="interface">
+    			<span>Trend:</span>
+    			<button class="btn btn-primary" ng-click="">Build</button>
+    		</div>
+    		<div class="interface">	
+    			<span>Gallery:</span>
+    			<button class="btn btn-primary" ng-click="">Build</button>
+    		</div>
+    	</fieldset>
+		</div>
+		<div class="hotspot col-md-6">
+			<h2>Hotspots:</h2>
+		</div>
 	</div>
-  <div class="col-md-6 interfaces">
-	  <label>Interfaces:</label>
-	  <div class="interfaces_list">
-	  	<div class="interface row">
-	  		<div class="col-md-2">
-		  		<p>Slider:</p>
-		  	</div>
-		  	<div class="col-md-10">
-		  		<button type="submit" class="btn btn-default">Build HotSpot</button>
-		  	</div>
-		  </div>
-		  <div class="interface row">
-		  	<div class="col-md-2">
-		  		<p>Trend:</p>
-		  	</div>
-		  	<div class="col-md-10">	
-		  		<select>
-		  			<option>
-		  				Sample Hotspot Trend
-		  			</option>
-		  		</select>
-		  		<button type="submit" class="btn btn-default">Build HotSpot</button>
-		  		<button type="submit" class="btn btn-default">Delete Hotspot</button>
-		  	</div>	
-		  </div>
-		  <div class="interface row">
-		  	<div class="col-md-2">	
-		  		<p>Gallery:</p>
-		  	</div>
-		  	<div class="col-md-10" style="float: left;">	
-			  	<select>
-			  		<option>
-			  			Existing Hotspots
-			  		</option>
-			  	</select>
-			  	<button type="submit" class="btn btn-default">Build HotSpot</button>
-			  	<button type="submit" class="btn btn-default">Save Hotspot</button>
-			  </div>	
-		  </div>	
-	  </div>
-  </div>
 </div>
