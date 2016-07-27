@@ -56,11 +56,16 @@ class SinatraApp < Sinatra::Base
     end
   end
 
-  post '/create_hotspot_collection' do
+  post '/save_hotspot_collection' do
     shopify_session do
       params = JSON.parse request.body.read
-      if @hotspot_collection = HotspotCustomCollection.create( title: params['title'], custom_collection_id: params['custom_collection_id'] ) # params here
-        flash[:notice] = "Hotspot collection succesfully added!"
+      if @hotspot_collection = HotspotCustomCollection.find_by( custom_collection_id: params['custom_collection_id'] )
+        @hotspot_collection.update_attributes params
+        flash[:notice] = "Hotspot collection succesfully saved!"
+      else
+        if @hotspot_collection = HotspotCustomCollection.create( title: params['title'], custom_collection_id: params['custom_collection_id'] ) # params here
+          flash[:notice] = "Hotspot collection succesfully created!"
+        end
       end  
     end
   end
