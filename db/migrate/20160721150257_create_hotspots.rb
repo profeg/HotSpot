@@ -4,7 +4,7 @@ class CreateHotspots < ActiveRecord::Migration
     	t.integer 		:x
   		t.integer 		:y
   		t.float   		:icon_scale
-  		t.belongs_to 	:hotspot_image, index: true, foreign_key: 'hotspot_image_id'
+  		t.belongs_to  :interface, index: true, foreign_key: 'interface_id'
       t.timestamps
     end
   end

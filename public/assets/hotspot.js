@@ -1,12 +1,3 @@
-function showHotSpot( elem ){
-	if ( elem ) {
-	  $('body').append("<div class='hotspot' style='display: none; z-index:100; background-color: white;'><span id='divTitle'></span>SHOW ME!</div>");
-	  $('.hotspot').css({'top': elem.offset().top, 'left': elem.offset().left + 16, 'position':'absolute', 'border':'1px solid black', 'padding':'5px'});
-	  $('.hotspot').show();
-	} else {
-		$('.hotspot').remove();
-	}
-}
 function initMapImage(){
   var mappedImages =  $("img[usemap]");
   mappedImages.each(function(index,img){
@@ -51,6 +42,16 @@ function initMapImage(){
       );
     });
   });
+  editMode();
+}
+function showHotSpot( elem ){
+  if ( elem ) {
+    $('body').append("<div class='hotspot' style='display: none; z-index:100; background-color: white;'><span id='divTitle'></span>SHOW ME!</div>");
+    $('.hotspot').css({'top': elem.offset().top, 'left': elem.offset().left + 16, 'position':'absolute', 'border':'1px solid black', 'padding':'5px'});
+    $('.hotspot').show();
+  } else {
+    $('.hotspot').remove();
+  }
 }
 function addHotSpot( coords ){
   $('map').append("<area shape='circle' coords='" + coords.x + "," + coords.y + ",8' href='#' alt='HotSpot'  target='_self'/>");
@@ -58,23 +59,17 @@ function addHotSpot( coords ){
   initMapImage();
 }
 function getXY( evt, element ) {
-	var rect = element.getBoundingClientRect();
-	var scrollTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
-	var scrollLeft = document.documentElement.scrollLeft? document.documentElement.scrollLeft : document.body.scrollLeft;
-	var elementLeft = rect.left+scrollLeft;  
-	var elementTop = rect.top+scrollTop;
-	x = evt.pageX-elementLeft;
-	y = evt.pageY-elementTop;
-	return {x:x, y:y};
+  var rect = element.getBoundingClientRect();
+  var scrollTop = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+  var scrollLeft = document.documentElement.scrollLeft? document.documentElement.scrollLeft : document.body.scrollLeft;
+  var elementLeft = rect.left+scrollLeft;  
+  var elementTop = rect.top+scrollTop;
+  x = evt.pageX-elementLeft;
+  y = evt.pageY-elementTop;
+  return {x:x, y:y};
 }
-function editMode( action ){
-  if ( action == 'start' ){
-    $('.imgmap').click(function(e){
-      addHotSpot( getXY(e, this) );
-    });
-  } else {
-    $('.imgmap').ubind('click');
-  }
-
+function editMode(){
+  $('.imgmap').click(function(e){
+    addHotSpot( getXY(e, this) );
+  });
 }
-

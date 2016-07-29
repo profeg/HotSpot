@@ -25,8 +25,8 @@ div.mapcircle{
 }
 
 
-.interfaces, .hotspot-collection {
-  border:1px solid lightgrey;
+.interfaces, .hotspot-collection, .hotspot-image, .hotspot {
+  border-bottom:1px solid lightgrey;
   padding: 10px;
 }
 .interface button {
@@ -41,4 +41,18 @@ div.mapcircle{
 
 img {
   border: 1px solid black;
+}
+.collection-image{
+  width: 100px;
+  height: 100px;
+}
+
+.custom-collection {
+  margin-bottom: 12px;
+  border-bottom: 1px solid lightgray;
+  min-height: 120px;
+}
+.title-custom-collection {
+  margin-bottom: 12px;
+  border-bottom: 1px solid lightgray; 
 }

@@ -1,0 +1,35 @@
+<div class="container"> 
+	<div class="row hotspot-image">
+		<img ng-src="{{ interface.image }}" usemap="#hotspots" imageonload >
+		<div class='imgmap' ng-click="addHotspot( $event )">
+			<div class="mapcircle" 
+					 style="left: {{hotspot.x - hotspot.icon_scale }}px; top: {{ hotspot.y - hotspot.icon_scale  }}px; width: {{ hotspot.icon_scale * 2}}px; height: {{ hotspot.icon_scale * 2}}px;" 
+					 data-ng-repeat="hotspot in hotspots">
+			</div>
+		</div>
+		<map name="hotspots">
+			<area shape="circle" coords="{{ hotspot.x }},{{ hotspot.y }},{{ hotspot.icon_scale }}" data-ng-repeat="hotspot in hotspots">
+		</map>
+	</div>
+	<div class="row hotspots">
+		<fieldset data-ng-repeat="hotspot in hotspots">
+			<div class="row hotspot">
+				<div class="col-md-4">        
+					<label>X</label>
+					<input type="edit" name="coord_x" value="66" ng-model="hotspot.x">
+				</div>
+				<div class="col-md-4">
+				  <label>Y</label>
+				  <input type="edit" name="coord_y" value="36" ng-model="hotspot.y">
+				</div>
+				<div class="col-md-4">
+				  <label>Icon scale:</label>
+				  <input type="edit" name="icon-scale" ng-model="hotspot.icon_scale">
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary save-hotspot" ng-click="saveHotspots();">Save Hotspots</button>
+	</div>
+</div>

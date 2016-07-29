@@ -1,47 +1,49 @@
 <div id="viewEdit" class="container">
 	<div class="row hotspot-collection">
-		<div class="data col-md-6">
-			<h2>Collection:</h2>
-			<fieldset class="form-group">
-    		<label for="title">Title</label>
-    		<input type="edit" class="form-control" id="title" placeholder="Title" ng-model="hotspot_collection.title">
-    		<label for="icon">Icon</label>
-    		<input type="file" class="form-control" id="icon" ng-model="hotspot_collection.icon">
-  		</fieldset>
-  		<button class="btn btn-primary save-collection" ng-click="saveHotspotCollection();">Save</button>
-  		<button class="btn btn-danger cancel" go-link="/showCollections">Cancel</button>
-		</div>
-		<div class="image col-md-6">
-			<h2>Featured image:</h2>
-			<img ng-src="{{ collection.image.src }}" style="width: 350px; heigth: 350px;" usemap="#hotspots">
-			<map name="hotspots">
-		  	<area shape="circle" coords="40,40,8" href="/hotspots/hs1.html" alt="HotSpot" target="_self"/>
-	    </map> 
-		</div>
+		<h2>Collection:</h2>
+		<fieldset class="form-group">
+			<label for="title">Title</label>
+			<input type="edit" class="form-control" id="title" placeholder="Title" ng-model="hotspot_collection.title">
+			<label for="icon">Icon</label>
+			<input type="file" class="form-control" id="icon" ng-model="hotspot_collection.icon">
+		</fieldset>
+		<button class="btn btn-primary save-collection" ng-click="saveHotspotCollection();">Save</button>
+		<button class="btn btn-danger cancel" go-link="/showCollections">Cancel</button>
 	</div>
-	<div class="row interfaces">
-		<div class="interface_sel col-md-6">
-			<h2>Interfaces:</h2>
-			<fieldset>
-				<div class="interface">
-    			<span>Slider:</span>
-    			<button class="btn btn-primary" ng-click="addHotspot('slider')">Build</button>
-				</div>
-				<div class="interface">
-    			<span>Trend:</span>
-    			<button class="btn btn-primary" ng-click="">Build</button>
-    		</div>
-    		<div class="interface">	
-    			<span>Gallery:</span>
-    			<button class="btn btn-primary" ng-click="">Build</button>
-    		</div>
-    	</fieldset>
-		</div>
-		<div class="hotspots col-md-6">
-			<h2>Hotspots:</h2>
-			<div class="hotspot">
-				<span>x: {{}} </span>
+	<div class="row hotspot-image">
+		<img ng-src="{{ collection.image.src }}" style="width: 350px; heigth: 350px;">
+	</div>
+	<div class="row interfaces" ng-show="hotspot_collection.id">
+		<h2>Interfaces:</h2>
+		<div class=" row interface">
+			<div class="col-md-2">
+				<span>Slider:</span>
+			</div>
+			<div class="col-md-10">
+				<button class="btn btn-primary" ng-click="addInterface('slider')" ng-hide="interfaces.slider">Create</button>
+				<button class="btn btn-primary" go-link="/addHotspots/{{ interfaces.slider.id }}" ng-show="interfaces.slider">Add Hotspot</button>
+				<button class="btn btn-primary" ng-click="showHotspots('slider')" ng-show="interfaces.slider">Show Hotspots</button>
 			</div>
 		</div>
+		<div class="row interface">
+			<div class="col-md-2">
+				<span>Trend:</span>
+			</div>
+			<div class="col-md-10">	
+				<button class="btn btn-primary" ng-click="addInterface('trend')" ng-hide="interfaces.trend">Create</button>
+				<button class="btn btn-primary" go-link="/addHotspots/{{ interfaces.trend.id }}" ng-show="interfaces.trend">Add Hotspot</button>
+				<button class="btn btn-primary" ng-click="showHotspots('trend')" ng-show="interfaces.trend">Show Hotspots</button>
+			</div>
+		</div>
+		<div class="row interface">	
+			<div class="col-md-2">
+				<span>Gallery:</span>
+			</div>
+			<div class="col-md-10">
+				<button class="btn btn-primary" ng-click="addInterface('gallery')" ng-hide="interfaces.gallery">Create</button>
+				<button class="btn btn-primary" go-link="/addHotspots/{{ interfaces.gallery.id }}" ng-show="interfaces.gallery">Add Hotspot</button>
+				<button class="btn btn-primary" ng-click="showHotspots('gallery')" ng-show="interfaces.gallery">Show Hotspots</button>
+			</div>
+		</div>		
 	</div>
 </div>

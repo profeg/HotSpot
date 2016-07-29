@@ -1,3 +1,3 @@
 class Hotspot < ActiveRecord::Base
-  belongs_to :hotspot_image
+  belongs_to :interface
 end

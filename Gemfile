@@ -8,6 +8,7 @@ gem 'mysql2', '~> 0.3.20'
 gem 'rack-flash3', require: 'rack-flash'
 gem 'rack-ssl'
 gem 'json'
+gem 'carrierwave'
 
 group :production do
 end

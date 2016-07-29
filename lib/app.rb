@@ -10,7 +10,7 @@ require 'active_record'
 require './lib/hotspot_image'
 require './lib/hotspot'
 require './lib/interface'
-require './lib/hotspot_custom_collection'
+require './lib/hotspot_collection'
 
 class SinatraApp < Sinatra::Base
   use Rack::SSL
@@ -41,72 +41,75 @@ class SinatraApp < Sinatra::Base
     end
   end
 
-  get '/hotspot_collection.json/:custom_collection_id' do
+  get '/hotspot_collection.json/:collection_id' do
     shopify_session do
-      @hotspot_collections = HotspotCustomCollection.find_by( custom_collection_id: params[:custom_collection_id] )
+      @hotspot_collections = HotspotCollection.find_by( collection_id: params[:collection_id] )
       content_type :json
         @hotspot_collections.to_json
     end
   end
 
-  get '/interface.json/:hotspot_collection_id' do
+  get '/interface.json/:id' do
     shopify_session do
-      @interface = Interface.find_by( collection_id: params[:hotspot_collection_id] )
-        @interface.to_json
+      Interface.find( params['id'] ).to_json
+    end
+  end
+
+  get '/interfaces.json/:hotspot_collection_id' do
+    shopify_session do
+      @interfaces = Interface.where( hotspot_collection_id: params[:hotspot_collection_id] )
+      @interfaces.to_json
+    end
+  end
+
+  get '/hotspots.json/:interface_id' do
+    shopify_session do
+      @hotspots = Hotspot.where interface_id: params[:interface_id]
+      @hotspots.to_json
     end
   end
 
   post '/save_hotspot_collection' do
     shopify_session do
       params = JSON.parse request.body.read
-      if @hotspot_collection = HotspotCustomCollection.find_by( custom_collection_id: params['custom_collection_id'] )
+      if @hotspot_collection = HotspotCollection.find_by( collection_id: params['collection_id'] )
         @hotspot_collection.update_attributes params
-        flash[:notice] = "Hotspot collection succesfully saved!"
       else
-        if @hotspot_collection = HotspotCustomCollection.create( title: params['title'], custom_collection_id: params['custom_collection_id'] ) # params here
-          flash[:notice] = "Hotspot collection succesfully created!"
-        end
+        HotspotCollection.create( title: params['title'], collection_id: params['collection_id'] ) # params here
       end  
     end
   end
 
-  put '/update_hotspot_collection' do
+  post '/save_interface' do
     shopify_session do
       params = JSON.parse request.body.read
-      if @hotspot_collection = HotspotCustomCollection.find( params['id'] )
-        @hotspot_collection.update_attributes params
-        flash[:notice] = "Hotspot collection succesfully added!"
-      end  
+      if @interface = Interface.find_by( hotspot_collection_id: params['collection_id'], title: params['title'], image: params['image'] )
+        @interface.update_attributes({
+          hotspot_collection_id: params['collection_id'], 
+          title: params['title']
+        })
+      else
+        @interface = Interface.create( hotspot_collection_id: params['collection_id'], title: params['title'], image: params['image'] )
+      end   
+      @hotspot_collection = HotspotCollection.find params['collection_id']
+      @hotspot_collection.interfaces << @interface
+      @hotspot_collection.save
     end
   end
 
-  post '/create_interface' do
-    webhook_session do |params|
-      if @interface = Interface.create( collection_id: params[:collection_id]) # params here
-        flash[:notice] = "Interface succesfully added!"
-        content_type :json
-          @interface.to_json
-      end  
-    end
-  end
-
-  post '/create_hotspot_image' do
+  post '/save_hotspots' do
     shopify_session do
-      if @hotspot_image = HotspotImage.create( interface_id: params[:interface_id] )
-        flash[:notice] = "Hotspot Image succesfully added!"
-        content_type :json
-          @hotspot_image.to_json
-      end  
-    end
-  end
-
-  post '/create_hotspot' do
-    shopify_session do
-      if Hotspot.create x: params[:x], y: params[:x], icon_scale: params[:x], hotspot_image_id: params[:hotspot_image_id]
-        flash[:notice] = "Hotspot succesfully added!"
+      params = JSON.parse request.body.read
+      interface = Interface.find params['interface_id']
+      interface.hotspots = params['hotspots'].collect do |hotspot|
+        Hotspot.create x: hotspot['x'], 
+                       y: hotspot['y'],
+                       icon_scale: hotspot['icon_scale']
       end
+      interface.save
     end
   end
+
 
 
   post '/uninstall' do
