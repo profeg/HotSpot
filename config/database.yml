@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: hotspot_dev
   username: debian-sys-maint
-  password: HKXxztpJSQvQtqrD
+  password: TThoEfMEJBMhgQnG
   host: 127.0.0.1
   port: 3306
 
@@ -12,7 +12,7 @@ test:
   encoding: utf8
   database: hotspot_test
   username: debian-sys-maint
-  password: HKXxztpJSQvQtqrD
+  password: TThoEfMEJBMhgQnG
   host: 127.0.0.1
   port: 3306
 

@@ -29,4 +29,4 @@ New Shopify-Sinatra-App
 2. Bundle 
 3. bundle exec rake db:setup
 3. Run with: foreman run bundle exec rackup config.ru
-4. Visit https://localhost:8443
+4. Visit https://localhost:8443 or Visit http://localhost:4567

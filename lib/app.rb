@@ -13,12 +13,12 @@ require './lib/interface'
 require './lib/hotspot_collection'
 
 class SinatraApp < Sinatra::Base
-  use Rack::SSL
+  # use Rack::SSL
   register Sinatra::Shopify
   
   set :scope, 'read_products, read_orders'
   # Change DB in production
-  set :database, 'mysql2://'+ ENV['mysql_user'] + ':'  + ENV['mysql_pass'] + '@localhost/hotspot_dev' 
+  set :database, 'mysql2://debian-sys-maint:TThoEfMEJBMhgQnG@localhost/hotspot_dev'
   get '/' do
     shopify_session do
       erb :home
@@ -118,19 +118,19 @@ class SinatraApp < Sinatra::Base
     end
   end
 
-  CERT_PATH = '/opt/myCA/'
-  webrick_options = {
-    :Port               => 8443,
-    :Logger             => WEBrick::Log::new($stderr, WEBrick::Log::DEBUG),
-    :DocumentRoot       => "/home/prof/Documents/HotSpot",
-    :SSLEnable          => true,
-    :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-    :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join(CERT_PATH, "server.crt")).read),
-    :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join(CERT_PATH, "server.key")).read),
-    :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ],
-    :app                => SinatraApp
-  }
-  Rack::Server.start webrick_options
+  # CERT_PATH = '/opt/myCA/'
+  # webrick_options = {
+  #   :Port               => 8443,
+  #   :Logger             => WEBrick::Log::new($stderr, WEBrick::Log::DEBUG),
+  #   :DocumentRoot       => "/home/prof/Documents/HotSpot",
+  #   :SSLEnable          => true,
+  #   :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
+  #   :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join(CERT_PATH, "server.crt")).read),
+  #   :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join(CERT_PATH, "server.key")).read),
+  #   :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ],
+  #   :app                => SinatraApp
+  # }
+  # Rack::Server.start webrick_options
 
   
 
