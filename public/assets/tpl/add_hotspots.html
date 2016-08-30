@@ -1,15 +1,12 @@
 <div class="container"> 
 	<div class="row hotspot-image">
-		<img ng-src="{{ interface.image }}" usemap="#hotspots" imageonload >
+		<img ng-src="{{ interface.image }}" usemap="#hotspots" imageonload class="{{ interface.title }}">
 		<div class='imgmap' ng-click="addHotspot( $event )">
 			<div class="mapcircle" 
 					 style="left: {{hotspot.x - hotspot.icon_scale }}px; top: {{ hotspot.y - hotspot.icon_scale  }}px; width: {{ hotspot.icon_scale * 2}}px; height: {{ hotspot.icon_scale * 2}}px;" 
 					 data-ng-repeat="hotspot in hotspots">
 			</div>
 		</div>
-		<map name="hotspots">
-			<area shape="circle" coords="{{ hotspot.x }},{{ hotspot.y }},{{ hotspot.icon_scale }}" data-ng-repeat="hotspot in hotspots">
-		</map>
 	</div>
 	<div class="row hotspots">
 		<fieldset data-ng-repeat="hotspot in hotspots">

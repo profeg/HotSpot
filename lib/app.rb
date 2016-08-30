@@ -24,7 +24,7 @@ class SinatraApp < Sinatra::Base
 
   set :scope, 'read_products, read_orders'
   # Change DB in production
-  set :database, 'mysql2://debian-sys-maint:TThoEfMEJBMhgQnG@localhost/hotspot_dev'
+  set :database, 'mysql2://debian-sys-maint:HKXxztpJSQvQtqrD@localhost/hotspot_dev'
   get '/' do
     shopify_session do
       erb :home
@@ -117,7 +117,7 @@ class SinatraApp < Sinatra::Base
   end
 
   get '/gallery_hotspot_collection_json/:collection_id' do
-    @json_hotspots = {}
+    @json_hotspots = []
     @collection_id = params[:collection_id]
     @hotspot_collection = HotspotCollection.find_by(collection_id: @collection_id)
     unless @hotspot_collection.nil?

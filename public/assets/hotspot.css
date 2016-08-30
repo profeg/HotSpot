@@ -56,3 +56,16 @@ img {
   margin-bottom: 12px;
   border-bottom: 1px solid lightgray; 
 }
+
+.trend {
+  width: 480px;
+  height: 480px;
+}
+.slider {
+  width: 788px;
+  height: 510px;
+}
+.gallery {
+  width: 100px;
+  height: 100px;
+}
