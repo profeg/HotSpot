@@ -11,17 +11,20 @@
 	<div class="row hotspots">
 		<fieldset data-ng-repeat="hotspot in hotspots">
 			<div class="row hotspot">
-				<div class="col-md-4">        
+				<div class="col-md-2">
 					<label>X</label>
-					<input type="edit" name="coord_x" value="66" ng-model="hotspot.x">
+					<input type="edit" name="coord_x" class="form-control" ng-model="hotspot.x">
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-2">
 				  <label>Y</label>
-				  <input type="edit" name="coord_y" value="36" ng-model="hotspot.y">
+				  <input type="edit" name="coord_y" class="form-control" ng-model="hotspot.y">
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-2">
 				  <label>Icon scale:</label>
-				  <input type="edit" name="icon-scale" ng-model="hotspot.icon_scale">
+				  <input type="edit" name="icon-scale" class="form-control" ng-model="hotspot.icon_scale">
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete Hotspots</button>
 				</div>
 			</div>
 		</fieldset>
