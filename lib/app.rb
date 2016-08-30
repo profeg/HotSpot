@@ -24,7 +24,8 @@ class SinatraApp < Sinatra::Base
 
   set :scope, 'read_products, read_orders'
   # Change DB in production
-  set :database, 'mysql2://debian-sys-maint:HKXxztpJSQvQtqrD@localhost/hotspot_dev'
+  # set :database, 'mysql2://debian-sys-maint:HKXxztpJSQvQtqrD@localhost/hotspot_dev'
+  set :database, 'mysql2://debian-sys-maint:TThoEfMEJBMhgQnG@localhost/hotspot_dev'
   get '/' do
     shopify_session do
       erb :home
@@ -116,12 +117,19 @@ class SinatraApp < Sinatra::Base
     end
   end
 
+  post '/delete_hotspot/:id' do
+    shopify_session do
+      @hotspot = Hotspot.find(params[:id])
+      @hotspot.destroy
+    end
+  end
+
   get '/gallery_hotspot_collection_json/:collection_id' do
     @json_hotspots = []
     @collection_id = params[:collection_id]
     @hotspot_collection = HotspotCollection.find_by(collection_id: @collection_id)
     unless @hotspot_collection.nil?
-      @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id)
+      @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id, title: params[:title])
       @hotspots = Hotspot.where(interface_id: @interface.id)
       @hotspots.each_with_index do |hotspot, index|
         @json_hotspots[index] = {'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
