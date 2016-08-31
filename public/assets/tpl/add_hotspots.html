@@ -21,14 +21,14 @@
                     <input type="edit" name="coord_y" class="form-control" ng-model="hotspot.y">
                 </div>
                 <div class="col-md-1">
-                    <label>Icon scale:</label>
+                    <label>Size:</label>
                     <input type="edit" name="icon-scale" class="form-control" ng-model="hotspot.icon_scale">
                 </div>
-                <div class="col-md-1">
-                    <label>Image:</label>
-                    <input type="edit" name="image" class="form-control" ng-model="hotspot.image">
-                </div>
                 <div class="col-md-2">
+                    <label>Image:</label>
+                    <input type="file" name="image" class="form-control" ng-model="hotspot.image">
+                </div>
+                <div class="col-md-3">
                     <label>Description:</label>
                     <input type="edit" name="description" class="form-control" ng-model="hotspot.description">
                 </div>
@@ -40,15 +40,11 @@
                     <label>Link to:</label>
                     <input type="edit" name="link_to" class="form-control" ng-model="hotspot.link_to">
                 </div>
+                <!--<div class="col-md-1">-->
+                    <!--<button class="btn btn-info update-hotspot" ng-click="updateHotspot(hotspot.id);">Update</button>-->
+                <!--</div>-->
                 <div class="col-md-1">
-                    <button class="btn btn-info update-hotspot" ng-click="updateHotspot(hotspot.id);">Update
-                        Hotspots
-                    </button>
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete
-                        Hotspots
-                    </button>
+                    <button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete</button>
                 </div>
             </div>
         </fieldset>
