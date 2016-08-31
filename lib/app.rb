@@ -107,13 +107,19 @@ class SinatraApp < Sinatra::Base
   post '/save_hotspots' do
     shopify_session do
       params = JSON.parse request.body.read
-      interface = Interface.find params['interface_id']
-      interface.hotspots = params['hotspots'].collect do |hotspot|
-        Hotspot.create x: hotspot['x'],
-                       y: hotspot['y'],
-                       icon_scale: hotspot['icon_scale']
+      @interface = Interface.find params['interface_id']
+      @hotspots = params['hotspots']
+      @hotspots.collect do |hotspot|
+        if hotspot['id'].blank?
+          Hotspot.create(x: hotspot['x'], y: hotspot['y'], icon_scale: hotspot['icon_scale'], image: hotspot['image'],
+                         description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'], interface_id: params['interface_id'])
+        else
+          @hotspot = Hotspot.find(hotspot['id'])
+          @hotspot.update_attributes(x: hotspot['x'], y: hotspot['y'], icon_scale: hotspot['icon_scale'], image: hotspot['image'],
+                                     description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'])
+        end
       end
-      interface.save
+      # @interface.save
     end
   end
 
