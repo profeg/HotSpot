@@ -1,35 +1,59 @@
-<div class="container"> 
-	<div class="row hotspot-image">
-		<img ng-src="{{ interface.image }}" usemap="#hotspots" imageonload class="{{ interface.title }}">
-		<div class='imgmap' ng-click="addHotspot( $event )">
-			<div class="mapcircle" 
-					 style="left: {{hotspot.x - hotspot.icon_scale }}px; top: {{ hotspot.y - hotspot.icon_scale  }}px; width: {{ hotspot.icon_scale * 2}}px; height: {{ hotspot.icon_scale * 2}}px;" 
-					 data-ng-repeat="hotspot in hotspots">
-			</div>
-		</div>
-	</div>
-	<div class="row hotspots">
-		<fieldset data-ng-repeat="hotspot in hotspots">
-			<div class="row hotspot">
-				<div class="col-md-2">
-					<label>X</label>
-					<input type="edit" name="coord_x" class="form-control" ng-model="hotspot.x">
-				</div>
-				<div class="col-md-2">
-				  <label>Y</label>
-				  <input type="edit" name="coord_y" class="form-control" ng-model="hotspot.y">
-				</div>
-				<div class="col-md-2">
-				  <label>Icon scale:</label>
-				  <input type="edit" name="icon-scale" class="form-control" ng-model="hotspot.icon_scale">
-				</div>
-				<div class="col-md-2">
-					<button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete Hotspots</button>
-				</div>
-			</div>
-		</fieldset>
-	</div>
-	<div class="row">
-		<button class="btn btn-primary save-hotspot" ng-click="saveHotspots();">Save Hotspots</button>
-	</div>
+<div class="container">
+    <div class="row hotspot-image">
+        <img ng-src="{{ interface.image }}" usemap="#hotspots" imageonload class="{{ interface.title }}">
+
+        <div class='imgmap' ng-click="addHotspot( $event )">
+            <div class="mapcircle"
+                 style="left: {{hotspot.x - hotspot.icon_scale }}px; top: {{ hotspot.y - hotspot.icon_scale  }}px; width: {{ hotspot.icon_scale * 2}}px; height: {{ hotspot.icon_scale * 2}}px;"
+                 data-ng-repeat="hotspot in hotspots">
+            </div>
+        </div>
+    </div>
+    <div class="row hotspots">
+        <fieldset data-ng-repeat="hotspot in hotspots">
+            <div class="row hotspot">
+                <div class="col-md-1">
+                    <label>X</label>
+                    <input type="edit" name="coord_x" class="form-control" ng-model="hotspot.x">
+                </div>
+                <div class="col-md-1">
+                    <label>Y</label>
+                    <input type="edit" name="coord_y" class="form-control" ng-model="hotspot.y">
+                </div>
+                <div class="col-md-1">
+                    <label>Icon scale:</label>
+                    <input type="edit" name="icon-scale" class="form-control" ng-model="hotspot.icon_scale">
+                </div>
+                <div class="col-md-1">
+                    <label>Image:</label>
+                    <input type="edit" name="image" class="form-control" ng-model="hotspot.image">
+                </div>
+                <div class="col-md-2">
+                    <label>Description:</label>
+                    <input type="edit" name="description" class="form-control" ng-model="hotspot.description">
+                </div>
+                <div class="col-md-1">
+                    <label>Price:</label>
+                    <input type="edit" name="price" class="form-control" ng-model="hotspot.price">
+                </div>
+                <div class="col-md-2">
+                    <label>Link to:</label>
+                    <input type="edit" name="link_to" class="form-control" ng-model="hotspot.link_to">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-info update-hotspot" ng-click="updateHotspot(hotspot.id);">Update
+                        Hotspots
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete
+                        Hotspots
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary save-hotspot" ng-click="saveHotspots();">Save Hotspots</button>
+    </div>
 </div>

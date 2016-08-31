@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725100709) do
+ActiveRecord::Schema.define(version: 20160831092006) do
 
   create_table "hotspot_collections", force: true do |t|
     t.string   "title"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20160725100709) do
     t.integer  "interface_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
+    t.string   "description"
+    t.integer  "price"
+    t.string   "link_to"
   end
 
   add_index "hotspots", ["interface_id"], name: "index_hotspots_on_interface_id", using: :btree
