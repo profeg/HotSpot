@@ -63,11 +63,17 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
         }
     };
     $scope.deleteHotspot = function (id) {
-        var url = ('/delete_hotspot/' + id);
-        $http.post(url)
-            .success(function (data) {
-                //$scope.hotspots
-            });
+      for (var i = $scope.hotspots.length - 1; i >= 0; i--) {
+        if ( $scope.hotspots[i].id == id ) {
+          $scope.hotspots.splice( i, 1 );
+          break;
+        }
+      }
+      var url = ('/delete_hotspot/' + id);
+      $http.post(url)
+        .success(function (data) {
+            //$scope.hotspots
+        });
     };
     $scope.addHotspot = function (evt) {
         var rect = $('.imgmap')[0].getBoundingClientRect();
@@ -81,7 +87,6 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
         $scope.hotspots.push({x: x, y: y, icon_scale: 8});
 
     };
-
 }]);
 HotSpotApp.controller('MainController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
     if ($rootScope.Collections == undefined) {
