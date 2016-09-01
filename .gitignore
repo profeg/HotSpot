@@ -6,3 +6,4 @@ config/database.yml
 .ruby-gemset
 .ruby-version
 .idea/
+public/uploads

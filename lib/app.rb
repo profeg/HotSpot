@@ -7,6 +7,8 @@ require 'webrick/https'
 require 'openssl'
 require 'json'
 require 'active_record'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
 require './lib/hotspot_image'
 require './lib/hotspot'
 require './lib/interface'
@@ -119,7 +121,6 @@ class SinatraApp < Sinatra::Base
                                      description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'])
         end
       end
-      # @interface.save
     end
   end
 
@@ -138,13 +139,20 @@ class SinatraApp < Sinatra::Base
       @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id, title: params[:title])
       @hotspots = Hotspot.where(interface_id: @interface.id)
       @hotspots.each_with_index do |hotspot, index|
-        @json_hotspots[index] = {'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
+        @json_hotspots[index] = {'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
                                   'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
                                   'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image}
       end
     end
     content_type :json
     @json_hotspots.to_json
+  end
+
+  post '/upload_hotspot_image' do
+    hotspot = Hotspot.find(params[:hotspot_id])
+    hotspot.image = params[:image]
+    hotspot.save
+    redirect to('/')
   end
 
 
