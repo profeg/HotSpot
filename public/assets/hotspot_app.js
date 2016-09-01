@@ -63,17 +63,17 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
         }
     };
     $scope.deleteHotspot = function (id) {
-      for (var i = $scope.hotspots.length - 1; i >= 0; i--) {
-        if ( $scope.hotspots[i].id == id ) {
-          $scope.hotspots.splice( i, 1 );
-          break;
+        for (var i = $scope.hotspots.length - 1; i >= 0; i--) {
+            if ($scope.hotspots[i].id == id) {
+                $scope.hotspots.splice(i, 1);
+                break;
+            }
         }
-      }
-      var url = ('/delete_hotspot/' + id);
-      $http.post(url)
-        .success(function (data) {
-            //$scope.hotspots
-        });
+        var url = ('/delete_hotspot/' + id);
+        $http.post(url)
+            .success(function (data) {
+                //$scope.hotspots
+            });
     };
     $scope.addHotspot = function (evt) {
         var rect = $('.imgmap')[0].getBoundingClientRect();
