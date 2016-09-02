@@ -50,7 +50,6 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
             $scope.interface = data;
             $http.get('/hotspots.json/' + $scope.interface.id)
                 .success(function (data) {
-                    console.log(data);
                     $scope.hotspots = data;
                 });
         });
@@ -70,10 +69,7 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
             }
         }
         var url = ('/delete_hotspot/' + id);
-        $http.post(url)
-            .success(function (data) {
-                //$scope.hotspots
-            });
+        $http.post(url);
     };
     $scope.addHotspot = function (evt) {
         var rect = $('.imgmap')[0].getBoundingClientRect();

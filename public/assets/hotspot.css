@@ -1,77 +1,89 @@
-.imgmap{
-  position:absolute;
-  z-index:10;
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+.imgmap {
+    position: absolute;
+    z-index: 10;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-div.mapcircle{
-  display:block;
-  position:absolute;
-  background-color:red;
-  border-radius:50%;
+
+.imgmap .mapcircle {
+    display: block;
+    position: absolute;
+    background: url(/plus-button.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
-  
+
 #mainView {
-	clear: both;
-	padding: 0 1em;
+    clear: both;
+    padding: 0 1em;
 }
+
 .active {
     background-color: #FFF !important;
     color: #000 !important;
 }
-.container {
-    margin: 0px 0px 0px 0px;
-}
 
+.container {
+    margin: 0 auto;
+}
 
 .interfaces, .hotspot-collection, .hotspot-image, .hotspot {
-  border-bottom:1px solid lightgrey;
-  padding: 10px;
+    border-bottom: 1px solid lightgrey;
+    padding: 10px;
 }
+
 .interface button {
-  padding-left: 5px;
+    padding-left: 5px;
 }
+
 .interface span {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 .data, .interface_sel {
-  border-right: 1px solid lightgrey; 
+    border-right: 1px solid lightgrey;
 }
 
 img {
-  border: 1px solid black;
+    border: 1px solid black;
 }
-.collection-image{
-  width: 100px;
-  height: 100px;
+
+.collection-image {
+    width: 100px;
+    height: 100px;
 }
 
 .custom-collection {
-  margin-bottom: 12px;
-  border-bottom: 1px solid lightgray;
-  min-height: 120px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid lightgray;
+    min-height: 120px;
 }
+
 .title-custom-collection {
-  margin-bottom: 12px;
-  border-bottom: 1px solid lightgray; 
+    margin-bottom: 12px;
+    border-bottom: 1px solid lightgray;
 }
 
 .trend {
-  width: 480px;
-  height: 480px;
+    width: 480px;
+    height: 480px;
 }
+
 .slider {
-  width: 788px;
-  height: 510px;
+    width: 788px;
+    height: 510px;
 }
+
 .gallery {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 }
+
 .delete-hotspot {
-  margin-top: 25px;
+    margin-top: 25px;
 }
+
 .update-hotspot {
-  margin-top: 25px;
+    margin-top: 25px;
 }

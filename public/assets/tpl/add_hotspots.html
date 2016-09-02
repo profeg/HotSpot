@@ -15,37 +15,32 @@
                 <div class="col-md-1">
                     <label>X</label>
                     <input type="edit" name="coord_x" class="form-control" ng-model="hotspot.x">
-                </div>
-                <div class="col-md-1">
+
                     <label>Y</label>
                     <input type="edit" name="coord_y" class="form-control" ng-model="hotspot.y">
                 </div>
                 <div class="col-md-1">
                     <label>Size:</label>
                     <input type="edit" name="icon-scale" class="form-control" ng-model="hotspot.icon_scale">
-                </div>
-                <div class="col-md-2">
-                    <form action="/upload_hotspot_image"  method="post" enctype="multipart/form-data">
-                        <input type="file" name="image" />
-                        <input type="hidden" name="hotspot_id" value="{{ hotspot.id }}">
-                        <input type="submit" name="submit" value="Upload" />
-                    </form>
-                </div>
-                <div class="col-md-3">
-                    <label>Description:</label>
-                    <input type="edit" name="description" class="form-control" ng-model="hotspot.description">
-                </div>
-                <div class="col-md-1">
+
                     <label>Price:</label>
                     <input type="edit" name="price" class="form-control" ng-model="hotspot.price">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
+                    <label>Image Hotspot:</label>
+                    <form action="/upload_hotspot_image"  method="post" enctype="multipart/form-data">
+                        <input type="file" name="image" class="btn btn-file btn-sm" />
+                        <input type="hidden" name="hotspot_id" value="{{ hotspot.id }}">
+                        <input type="submit" name="submit" value="Upload" class="btn btn-primary btn-xs" />
+                    </form>
+
                     <label>Link to:</label>
                     <input type="edit" name="link_to" class="form-control" ng-model="hotspot.link_to">
                 </div>
-                <!--<div class="col-md-1">-->
-                    <!--<button class="btn btn-info update-hotspot" ng-click="updateHotspot(hotspot.id);">Update</button>-->
-                <!--</div>-->
+                <div class="col-md-5">
+                    <label>Description:</label>
+                    <input type="edit" name="description" class="form-control" ng-model="hotspot.description">
+                </div>
                 <div class="col-md-1">
                     <button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete</button>
                 </div>
