@@ -141,7 +141,7 @@ class SinatraApp < Sinatra::Base
       @hotspots.each_with_index do |hotspot, index|
         @json_hotspots[index] = {'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
                                   'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
-                                  'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image}
+                                  'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image.url}
       end
     end
     content_type :json
