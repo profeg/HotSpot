@@ -24,6 +24,12 @@ class SinatraApp < Sinatra::Base
             'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
   end
 
+  before '/slider_hotspot_collection_json/:collection_id' do
+    content_type :json
+    headers 'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST']
+  end
+
   set :scope, 'read_products, read_orders'
   # Change DB in production
   # set :database, 'mysql2://debian-sys-maint:HKXxztpJSQvQtqrD@localhost/hotspot_dev'
@@ -132,18 +138,13 @@ class SinatraApp < Sinatra::Base
   end
 
   get '/gallery_hotspot_collection_json/:collection_id' do
-    @json_hotspots = []
-    @collection_id = params[:collection_id]
-    @hotspot_collection = HotspotCollection.find_by(collection_id: @collection_id)
-    unless @hotspot_collection.nil?
-      @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id, title: params[:title])
-      @hotspots = Hotspot.where(interface_id: @interface.id)
-      @hotspots.each_with_index do |hotspot, index|
-        @json_hotspots[index] = {'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
-                                  'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
-                                  'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image.url}
-      end
-    end
+    get_hotspots_json(params)
+    content_type :json
+    @json_hotspots.to_json
+  end
+
+  get '/slider_hotspot_collection_json/:collection_id' do
+    get_hotspots_json(params)
     content_type :json
     @json_hotspots.to_json
   end
@@ -181,4 +182,20 @@ class SinatraApp < Sinatra::Base
 
   def after_shopify_auth
   end
+
+  def get_hotspots_json(params)
+    @json_hotspots = []
+    @collection_id = params[:collection_id]
+    @hotspot_collection = HotspotCollection.find_by(collection_id: @collection_id)
+    unless @hotspot_collection.nil?
+      @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id, title: params[:title])
+      @hotspots = Hotspot.where(interface_id: @interface.id)
+      @hotspots.each_with_index do |hotspot, index|
+        @json_hotspots[index] = {'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
+                                 'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
+                                 'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image.url}
+      end
+    end
+  end
+
 end
