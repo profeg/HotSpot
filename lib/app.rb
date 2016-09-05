@@ -120,11 +120,13 @@ class SinatraApp < Sinatra::Base
       @hotspots.collect do |hotspot|
         if hotspot['id'].blank?
           Hotspot.create(x: hotspot['x'], y: hotspot['y'], icon_scale: hotspot['icon_scale'], image: hotspot['image'],
-                         description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'], interface_id: params['interface_id'])
+                         description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'],
+                         interface_id: params['interface_id'], position: hotspot['position'])
         else
           @hotspot = Hotspot.find(hotspot['id'])
           @hotspot.update_attributes(x: hotspot['x'], y: hotspot['y'], icon_scale: hotspot['icon_scale'], image: hotspot['image'],
-                                     description: hotspot['description'], price: hotspot['price'], link_to: hotspot['link_to'])
+                                     description: hotspot['description'], price: hotspot['price'],
+                                     link_to: hotspot['link_to'], position: hotspot['position'])
         end
       end
     end
@@ -191,9 +193,10 @@ class SinatraApp < Sinatra::Base
       @interface = Interface.find_by(hotspot_collection_id: @hotspot_collection.id, title: params[:title])
       @hotspots = Hotspot.where(interface_id: @interface.id)
       @hotspots.each_with_index do |hotspot, index|
-        @json_hotspots[index] = {'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x, 'y' => hotspot.y,
-                                 'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
-                                 'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image.url}
+        @json_hotspots[index] = { 'hotspot_id' => hotspot.id, 'collection_id' => @collection_id, 'x' => hotspot.x,
+                                  'y' => hotspot.y, 'icon_scale' => hotspot.icon_scale, 'description' => hotspot.description,
+                                  'price' => hotspot.price, 'link_to' => hotspot.link_to, 'image' => hotspot.image.url,
+                                  'position' => hotspot.position }
       end
     end
   end

@@ -80,8 +80,7 @@ HotSpotApp.controller('HotspotsController', ['$scope', '$rootScope', '$http', '$
         var x = evt.pageX - elementLeft;
         var y = evt.pageY - elementTop;
 
-        $scope.hotspots.push({x: x, y: y, icon_scale: 8});
-
+        $scope.hotspots.push({x: x, y: y, icon_scale: 8, position: 'Top'});
     };
 }]);
 HotSpotApp.controller('MainController', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
