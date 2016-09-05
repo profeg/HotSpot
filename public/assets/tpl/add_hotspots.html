@@ -40,6 +40,12 @@
                 <div class="col-md-5">
                     <label>Description:</label>
                     <input type="edit" name="description" class="form-control" ng-model="hotspot.description">
+
+                    <label>Position:</label>
+                    <input type="radio" value="Top" ng-model="hotspot.position"> Top<br>
+                    <input type="radio" value="Left" ng-model="hotspot.position"> Left<br>
+                    <input type="radio" value="Bottom" ng-model="hotspot.position"> Bottom<br>
+                    <input type="radio" value="Right" ng-model="hotspot.position"> Right<br>
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-danger delete-hotspot" ng-click="deleteHotspot(hotspot.id);">Delete</button>
